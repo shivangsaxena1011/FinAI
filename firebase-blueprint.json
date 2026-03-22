@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user authentication and financial data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID" },
+        "email": { "type": "string", "format": "email", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User's full name" },
+        "photoURL": { "type": "string", "description": "User's profile picture URL" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Account creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" },
+        "userData": { "$ref": "UserData" }
+      },
+      "required": ["uid", "email", "displayName", "userData"]
+    },
+    "UserData": {
+      "title": "User Financial Data",
+      "description": "Detailed financial information for a user",
+      "type": "object",
+      "properties": {
+        "age": { "type": "integer" },
+        "monthlyIncome": { "type": "number" },
+        "monthlyExpenses": { "type": "number" },
+        "savings": { "type": "number" },
+        "loans": { "type": "number" },
+        "investments": { "type": "object" },
+        "insurance": { "type": "object" },
+        "emergencyFundMonths": { "type": "number" },
+        "goals": { "type": "array" },
+        "expensesBreakdown": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Collection of user profiles"
+    }
+  }
+}
